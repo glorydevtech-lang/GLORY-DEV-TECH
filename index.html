@@ -1,0 +1,414 @@
+
+
+Index · HTML
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GLORY DEV TECH — Android app studio, Kota</title>
+<meta name="description" content="GLORY DEV TECH is an independent Android app development studio run by Harish Gurjar, based in Kota, Rajasthan. Building Average Price Calculator, RJ Quiz Master, PDF Maker and Chotu Learner.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0F1117;
+    --surface: #171B24;
+    --surface-2: #1E2330;
+    --line: #2A3040;
+    --text: #F2F3F5;
+    --muted: #9AA1AC;
+    --kotlin: #7F52FF;
+    --android: #3DDC84;
+  }
+ 
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+ 
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+ 
+  .mono{
+    font-family: 'JetBrains Mono', monospace;
+  }
+ 
+  h1,h2,h3{
+    font-family: 'Space Grotesk', sans-serif;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+ 
+  a{ color: inherit; }
+ 
+  .wrap{
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+ 
+  /* Header */
+  header{
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgba(15,17,23,0.85);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding: 18px 0;
+  }
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size: 16px;
+    letter-spacing: 0.02em;
+  }
+  .brand-mark{
+    width: 10px; height:10px; border-radius: 2px;
+    background: linear-gradient(135deg, var(--kotlin), var(--android));
+    flex-shrink:0;
+  }
+  nav ul{
+    list-style:none;
+    display:flex;
+    gap: 28px;
+    margin:0; padding:0;
+    font-size: 14px;
+    color: var(--muted);
+  }
+  nav a{ text-decoration:none; transition: color .15s ease; }
+  nav a:hover, nav a:focus-visible{ color: var(--text); }
+  nav a:focus-visible{ outline: 2px solid var(--kotlin); outline-offset: 4px; border-radius:2px; }
+ 
+  @media (max-width: 640px){
+    nav ul{ gap: 16px; font-size: 13px; }
+  }
+ 
+  /* Hero */
+  .hero{
+    padding: 88px 0 72px;
+    border-bottom: 1px solid var(--line);
+  }
+  .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--android);
+    margin-bottom: 22px;
+  }
+  .eyebrow .dot{
+    width:6px;height:6px;border-radius:50%;
+    background: var(--android);
+    box-shadow: 0 0 0 3px rgba(61,220,132,0.15);
+  }
+  .hero h1{
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 600;
+    max-width: 780px;
+    line-height: 1.12;
+  }
+  .hero h1 .accent{
+    background: linear-gradient(90deg, var(--kotlin), var(--android));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .cursor{
+    display:inline-block;
+    width: 3px;
+    height: 0.9em;
+    background: var(--android);
+    margin-left: 4px;
+    transform: translateY(2px);
+    animation: blink 1s steps(1) infinite;
+  }
+  @media (prefers-reduced-motion: reduce){
+    .cursor{ animation: none; opacity: .7; }
+  }
+  @keyframes blink{ 50%{ opacity: 0; } }
+ 
+  .hero p.sub{
+    margin-top: 20px;
+    font-size: 17px;
+    color: var(--muted);
+    max-width: 560px;
+  }
+ 
+  .hero-meta{
+    display:flex;
+    gap: 32px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+  }
+  .hero-meta div{ font-size: 13px; color: var(--muted); }
+  .hero-meta strong{
+    display:block;
+    font-family:'Space Grotesk', sans-serif;
+    font-size: 20px;
+    color: var(--text);
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+ 
+  /* Section shared */
+  section{ padding: 64px 0; border-bottom: 1px solid var(--line); }
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    gap: 16px;
+    margin-bottom: 36px;
+    flex-wrap: wrap;
+  }
+  .section-head h2{ font-size: 26px; font-weight: 600; }
+  .section-head .count{ font-size: 13px; color: var(--muted); }
+ 
+  /* Apps grid */
+  .apps{
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  @media (max-width: 680px){
+    .apps{ grid-template-columns: 1fr; }
+  }
+  .app-card{
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 22px;
+    transition: border-color .15s ease, transform .15s ease;
+  }
+  .app-card:hover{
+    border-color: var(--kotlin);
+    transform: translateY(-2px);
+  }
+  .app-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom: 12px;
+  }
+  .app-name{
+    font-family:'Space Grotesk', sans-serif;
+    font-size: 17px;
+    font-weight: 600;
+  }
+  .tag{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+  .tag.live{ color: var(--android); background: rgba(61,220,132,0.1); border:1px solid rgba(61,220,132,0.25); }
+  .tag.dev{ color: var(--kotlin); background: rgba(127,82,255,0.12); border:1px solid rgba(127,82,255,0.3); }
+  .app-desc{ font-size: 14px; color: var(--muted); }
+ 
+  /* About */
+  .about-grid{
+    display:grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 48px;
+    align-items:start;
+  }
+  @media (max-width: 720px){
+    .about-grid{ grid-template-columns: 1fr; gap: 28px; }
+  }
+  .about-grid p{ color: var(--muted); font-size: 15px; margin: 0 0 14px; }
+  .about-grid p:last-child{ margin-bottom: 0; }
+  .stack{
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 20px;
+  }
+  .stack h3{
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    font-family:'JetBrains Mono', monospace;
+    font-weight: 500;
+    margin-bottom: 14px;
+  }
+  .stack ul{
+    list-style:none; margin:0; padding:0;
+    display:flex; flex-direction:column; gap: 10px;
+  }
+  .stack li{
+    display:flex; justify-content:space-between;
+    font-size: 13px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--line);
+  }
+  .stack li:last-child{ border-bottom: none; padding-bottom:0; }
+  .stack li span:last-child{ color: var(--muted); font-family:'JetBrains Mono', monospace; font-size: 12px; }
+ 
+  /* Contact */
+  .contact{ border-bottom: none; }
+  .contact-card{
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 36px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .contact-card h2{ font-size: 22px; font-weight:600; margin-bottom: 8px; }
+  .contact-card p{ color: var(--muted); font-size: 14px; margin:0; }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background: linear-gradient(90deg, var(--kotlin), #6a3ff0);
+    color: #fff;
+    text-decoration:none;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 12px 20px;
+    border-radius: 8px;
+    transition: opacity .15s ease;
+    white-space: nowrap;
+  }
+  .btn:hover, .btn:focus-visible{ opacity: 0.88; }
+  .btn:focus-visible{ outline: 2px solid var(--android); outline-offset: 3px; }
+ 
+  footer{
+    padding: 28px 0 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  footer .mono{ color: #5B6270; }
+</style>
+</head>
+<body>
+ 
+<header>
+  <div class="wrap nav">
+    <div class="brand"><span class="brand-mark"></span>GLORY DEV TECH</div>
+    <nav>
+      <ul>
+        <li><a href="#apps">Apps</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+ 
+<section class="hero wrap" style="border-bottom:1px solid var(--line);">
+  <div class="eyebrow mono"><span class="dot"></span>independent android studio · kota, rajasthan</div>
+  <h1>Android apps built one <span class="accent">release</span> at a time<span class="cursor" aria-hidden="true"></span></h1>
+  <p class="sub">GLORY DEV TECH is a one-developer Android studio. No agency layer, no outsourcing — every screen, every release, written and shipped by the same person who answers your email.</p>
+  <div class="hero-meta">
+    <div><strong>4</strong>apps shipped &amp; in progress</div>
+    <div><strong>Kotlin</strong>+ Jetpack Compose</div>
+    <div><strong>2025</strong>studio founded</div>
+  </div>
+</section>
+ 
+<section id="apps" class="wrap">
+  <div class="section-head">
+    <h2>Apps</h2>
+    <span class="count mono">4 total</span>
+  </div>
+  <div class="apps">
+    <div class="app-card">
+      <div class="app-top">
+        <span class="app-name">Average Price Calculator</span>
+        <span class="tag live">live</span>
+      </div>
+      <p class="app-desc">A focused utility app for working out average and unit pricing quickly — built for everyday shopping and business calculations.</p>
+    </div>
+    <div class="app-card">
+      <div class="app-top">
+        <span class="app-name">RJ Quiz Master</span>
+        <span class="tag live">live</span>
+      </div>
+      <p class="app-desc">A quiz app covering general knowledge and Rajasthan-specific content, built for casual play and exam-style practice.</p>
+    </div>
+    <div class="app-card">
+      <div class="app-top">
+        <span class="app-name">PDF Maker</span>
+        <span class="tag live">live</span>
+      </div>
+      <p class="app-desc">A lightweight tool for creating and managing PDF documents directly on Android, without needing a desktop.</p>
+    </div>
+    <div class="app-card">
+      <div class="app-top">
+        <span class="app-name">Chotu Learner</span>
+        <span class="tag dev">in development</span>
+      </div>
+      <p class="app-desc">A learning app for young children, built with families-policy compliance in mind from the ground up.</p>
+    </div>
+  </div>
+</section>
+ 
+<section id="about" class="wrap">
+  <div class="section-head">
+    <h2>About</h2>
+  </div>
+  <div class="about-grid">
+    <div>
+      <p>GLORY DEV TECH is run by Harish Gurjar, a self-taught Android developer based in Ramganj Mandi, Kota, Rajasthan. The studio designs, builds, and maintains every app in its lineup end-to-end — from Kotlin and Jetpack Compose on the front end through to Play Console publishing and compliance.</p>
+      <p>The goal is simple: small, well-built utility and learning apps that solve one problem cleanly, published under a single accountable name rather than an anonymous team.</p>
+    </div>
+    <div class="stack">
+      <h3>// studio details</h3>
+      <ul>
+        <li><span>Founder</span><span>Harish Gurjar</span></li>
+        <li><span>Location</span><span>Kota, Rajasthan, IN</span></li>
+        <li><span>Languages</span><span>Kotlin, Compose</span></li>
+        <li><span>Focus</span><span>Utility &amp; learning apps</span></li>
+        <li><span>Platform</span><span>Android</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+ 
+<section id="contact" class="wrap contact">
+  <div class="contact-card">
+    <div>
+      <h2>Get in touch</h2>
+      <p>Questions about an app, a bug to report, or a partnership idea — reach out directly.</p>
+    </div>
+    <a class="btn" href="mailto:glorydevtech@gmail.com">glorydevtech@gmail.com</a>
+  </div>
+</section>
+ 
+<footer class="wrap">
+  <div>© <span id="year"></span> GLORY DEV TECH. All rights reserved.</div>
+  <div class="mono">built with kotlin &amp; jetpack compose</div>
+</footer>
+ 
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+ 
+</body>
+</html>
+ 
